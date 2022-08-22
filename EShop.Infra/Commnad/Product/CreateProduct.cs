@@ -1,9 +1,12 @@
-﻿using System;
+﻿using MongoDB.Bson.Serialization.Attributes;
+using System;
 
 namespace EShop.Infra.Commnad.Product
 {
     public class CreateProduct
     {
+        [BsonId]
+        [BsonRepresentation(MongoDB.Bson.BsonType.ObjectId)]
         public Guid Id { get; set; }
 
         public string Name { get; set; }
