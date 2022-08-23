@@ -17,7 +17,7 @@ namespace EShop.Product.Api.Controllers
 			_productService = productService;
 		}
 
-		[HttpGet]
+		
 		public async Task<ActionResult> Get(Guid id) 
 		{
 			var product = await _productService.GetProduct(id);

@@ -3,19 +3,13 @@ using EShop.Product.Api.Repositories;
 using EShop.Product.Api.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace EShop.Product.Api
 {
-    public class Startup
+	public class Startup
     {
         public Startup(IConfiguration configuration)
         {
@@ -29,8 +23,9 @@ namespace EShop.Product.Api
         {
             services.AddControllers();
             services.AddMongoDB(Configuration);
-            services.AddTransient<IProductRepository, ProductRepository>();
-            services.AddTransient<IProductService, ProductService>();
+            services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<IProductRepository, ProductRepository>();
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -42,6 +37,9 @@ namespace EShop.Product.Api
             }
 
             app.UseRouting();
+
+            var db = app.ApplicationServices.GetService<IDatabaseInitializer>();
+            db.Initialize();
 
             app.UseAuthorization();
 

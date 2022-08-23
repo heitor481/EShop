@@ -23,12 +23,13 @@ namespace EShop.Infra.Mongo
                 return new MongoClient(mongoConfig.ConnectionString);
             });
 
-            services.AddSingleton<IMongoClient>(client =>
+            services.AddSingleton<IMongoDatabase>(client =>
             {
-                var mongoClient = client.GetService<MongoClient>();
-                mongoClient.GetDatabase(mongoConfig.Database);
-                return mongoClient;
+                var mongoClient = client.GetService<IMongoClient>();
+                return mongoClient.GetDatabase(mongoConfig.Database);
             });
+
+            services.AddSingleton<IDatabaseInitializer, MongoInitializer>();
         }
     }
 }

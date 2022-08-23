@@ -34,7 +34,7 @@ namespace EShop.Product.Api.Repositories
                 throw new Exception("Product not found");
             }
             await Task.CompletedTask;
-            return new ProductCreated();
+            return new ProductCreated() { Id = product.Id, Name = product.Name};
         }
     }
 }

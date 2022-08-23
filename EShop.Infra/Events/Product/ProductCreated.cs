@@ -1,11 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using MongoDB.Bson.Serialization.Attributes;
+using System;
 
 namespace EShop.Infra.Events.Product
 {
-    public class ProductCreated
+	public class ProductCreated
     {
+        [BsonId]
+		[BsonRepresentation(MongoDB.Bson.BsonType.ObjectId)]
         public Guid Id { get; set; }
 
         public string Name { get; set; }
