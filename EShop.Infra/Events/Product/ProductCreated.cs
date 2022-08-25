@@ -7,7 +7,7 @@ namespace EShop.Infra.Events.Product
     {
         [BsonId]
 		[BsonRepresentation(MongoDB.Bson.BsonType.ObjectId)]
-        public Guid Id { get; set; }
+        public string Id { get; set; }
 
         public string Name { get; set; }
 

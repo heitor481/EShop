@@ -20,7 +20,7 @@ namespace EShop.Product.Api.Services
             return _productRepository.Add(input);
         }
 
-        public Task<ProductCreated> GetProduct(Guid id)
+        public Task<ProductCreated> GetProduct(string id)
         {
             return _productRepository.Get(id);
         }

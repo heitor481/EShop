@@ -7,7 +7,7 @@ namespace EShop.Product.Api.Services
 {
     public interface IProductService
     {
-        Task<ProductCreated> GetProduct(Guid id);
+        Task<ProductCreated> GetProduct(string id);
         Task<ProductCreated> AddProduct(CreateProduct input);
     }
 }

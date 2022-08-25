@@ -18,7 +18,7 @@ namespace EShop.Product.Api.Controllers
 		}
 
 		
-		public async Task<ActionResult> Get(Guid id) 
+		public async Task<ActionResult> Get(string id) 
 		{
 			var product = await _productService.GetProduct(id);
 			return Ok(product);

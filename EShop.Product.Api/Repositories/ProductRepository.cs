@@ -22,10 +22,14 @@ namespace EShop.Product.Api.Repositories
         public async Task<ProductCreated> Add(CreateProduct input)
         {
             await _mongoCollection.InsertOneAsync(input);
-            return new ProductCreated();
+            return new ProductCreated() 
+            {
+                Name = input.Name,
+                Id = input.Id,
+            };
         }
 
-        public async Task<ProductCreated> Get(Guid id)
+        public async Task<ProductCreated> Get(string id)
         {
             var product =  _mongoCollection.AsQueryable().Where(x => x.Id == id).FirstOrDefault();
 
@@ -33,6 +37,7 @@ namespace EShop.Product.Api.Repositories
             {
                 throw new Exception("Product not found");
             }
+
             await Task.CompletedTask;
             return new ProductCreated() { Id = product.Id, Name = product.Name};
         }

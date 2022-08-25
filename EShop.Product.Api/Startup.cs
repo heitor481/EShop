@@ -42,19 +42,18 @@ namespace EShop.Product.Api
             }
 
             app.UseRouting();
-
-            var db = app.ApplicationServices.GetService<IDatabaseInitializer>();
-            db.Initialize();
-
             app.UseAuthorization();
-
-            var bus = app.ApplicationServices.GetService<IBusControl>();
-            bus.Start();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
+
+            var bus = app.ApplicationServices.GetService<IBusControl>();
+            bus.Start();
+
+            var db = app.ApplicationServices.GetService<IDatabaseInitializer>();
+            db.Initialize();
         }
     }
 }
