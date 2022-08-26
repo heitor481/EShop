@@ -1,14 +1,11 @@
+using EShop.Infra.Mongo;
+using EShop.Product.User.Api.Extensions;
+using MassTransit;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace EShop.User.Api
 {
@@ -25,7 +22,10 @@ namespace EShop.User.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            
+            services.AddMongoDB(Configuration);
+            services.AddMassTransitExtension(Configuration);
+            services.AddDependencyInjection();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -44,6 +44,12 @@ namespace EShop.User.Api
             {
                 endpoints.MapControllers();
             });
+
+            var bus = app.ApplicationServices.GetService<IBusControl>();
+            bus.Start();
+
+            var db = app.ApplicationServices.GetService<IDatabaseInitializer>();
+            db.Initialize();
         }
     }
 }
