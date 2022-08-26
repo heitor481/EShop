@@ -1,4 +1,5 @@
 ﻿using EShop.Infra.Commnad.Product;
+using EShop.Infra.EShopConts;
 using MassTransit;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -27,7 +28,7 @@ namespace EShop.ApiGateway.Controllers
         [HttpPost]
         public async Task<IActionResult> Add(CreateProduct input) 
         {
-            var url = new Uri("rabbitmq://localhost/create_product");
+            var url = new Uri(EShopConst.RabbitMQConnection + "/create_product");
             var endpoint = await _busControl.GetSendEndpoint(url);
             await endpoint.Send(input);
             return Accepted("Product Created");

@@ -1,8 +1,5 @@
 using EShop.Infra.Mongo;
 using EShop.Product.Api.Extensions;
-using EShop.Product.Api.Handlers;
-using EShop.Product.Api.Repositories;
-using EShop.Product.Api.Services;
 using MassTransit;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -27,10 +24,7 @@ namespace EShop.Product.Api
             services.AddControllers();
             services.AddMongoDB(Configuration);
             services.AddMassTransitExtension(Configuration);
-            services.AddScoped<IProductService, ProductService>();
-            services.AddScoped<IProductRepository, ProductRepository>();
-            services.AddScoped<CreateProductHandler>();
-           
+            services.AddDependencyInjection();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
