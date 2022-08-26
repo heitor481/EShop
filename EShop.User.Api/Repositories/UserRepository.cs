@@ -30,12 +30,6 @@ namespace EShop.User.Api.Repositories
         public async Task<UserCreated> GetUserById(string username)
         {
             var user = await _mongoCollection.AsQueryable().FirstOrDefaultAsync(x => x.Username == username);
-
-            if (user == null) 
-            {
-                throw new System.Exception("User not found");
-            }
-
             return new UserCreated() { Id = user.Id, Username = user.Username };
         }
     }
