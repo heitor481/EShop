@@ -3,7 +3,7 @@ using EShop.Infra.Events.Product;
 using System;
 using System.Threading.Tasks;
 
-namespace EShop.Product.Api.Services
+namespace EShop.Product.DataProvider.Services
 {
     public interface IProductService
     {

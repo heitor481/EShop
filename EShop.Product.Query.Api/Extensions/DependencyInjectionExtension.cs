@@ -1,9 +1,9 @@
-﻿using EShop.Product.Api.Handlers;
-using EShop.Product.DataProvider.Repositories;
+﻿using EShop.Product.DataProvider.Repositories;
 using EShop.Product.DataProvider.Services;
+using EShop.Product.Query.Api.Handles;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace EShop.Product.Api.Extensions
+namespace EShop.Product.Query.Api.Extensions
 {
     public static class DependencyInjectionExtension
     {
@@ -11,7 +11,7 @@ namespace EShop.Product.Api.Extensions
         {
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<IProductRepository, ProductRepository>();
-            services.AddScoped<CreateProductHandler>();
+            services.AddScoped<GetProductByIdHandler>();
             return services;
         }
     }

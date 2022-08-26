@@ -1,7 +1,6 @@
 ﻿using EShop.Infra.Commnad.Product;
-using EShop.Product.Api.Services;
+using EShop.Product.DataProvider.Services;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Threading.Tasks;
 
 namespace EShop.Product.Api.Controllers
