@@ -25,15 +25,15 @@ namespace EShop.User.Query.Api.Handlers
 
             if (user != null) 
             {
-                var isAllowed = user.ValidatePassowrd(_encrypter, user);
+                var isAllowed = user.ValidatePassword(context.Message, _encrypter);
 
                 if (isAllowed) 
                 {
-                    
+                    await context.RespondAsync(user);
                 }
             }
 
-            await context.RespondAsync(user);
+            await context.RespondAsync(null);
         }
     }
 }

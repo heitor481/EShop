@@ -6,16 +6,17 @@ namespace EShop.User.DataProvider.Extensions
 {
     public static class CryptoExtension
     {
-        public static CreateUser SetPassword(this CreateUser user, IEncrypter encrypter) 
+        public static CreateUser SetPassword(this CreateUser userCreated, IEncrypter encrypter) 
         {
             var salt = encrypter.GetSalt();
-            user.Password = encrypter.GetHash(user.Password, salt);
-            return user;
+            userCreated.Password = encrypter.GetHash(userCreated.Password, salt);
+            return userCreated;
         }
 
-        public static bool ValidatePassowrd(this UserCreated user, IEncrypter encrypter, UserCreated savedUser) 
+        public static bool ValidatePassword(this UserCreated userCreated, UserLogin userLogin, IEncrypter encrypter) 
         { 
-            return savedUser.Password.Equals(encrypter.GetHash(savedUser.Password, encrypter.GetSalt()));
+            var password = encrypter.GetHash(userLogin.Password, encrypter.GetSalt());
+            return userCreated.Password.Equals(password);
         }
     }
 }
