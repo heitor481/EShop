@@ -3,6 +3,8 @@ using EShop.Infra.EShopConts;
 using EShop.Infra.Events.Product;
 using EShop.Infra.Queries.Product;
 using MassTransit;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
@@ -37,6 +39,7 @@ namespace EShop.ApiGateway.Controllers
         }
 
         [HttpPost]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<IActionResult> Add(CreateProduct input) 
         {
             var url = new Uri(EShopConst.RabbitMQConnection + "/create_product");

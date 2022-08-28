@@ -1,7 +1,6 @@
+using EShop.Infra.Authentication;
 using EShop.Infra.Mongo;
-using EShop.Product.DataProvider.Services;
 using EShop.Product.Query.Api.Extensions;
-using EShop.Product.Query.Api.Handles;
 using MassTransit;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;

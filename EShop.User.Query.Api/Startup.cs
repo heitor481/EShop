@@ -1,3 +1,4 @@
+using EShop.Infra.Authentication;
 using EShop.Infra.Mongo;
 using EShop.Product.Query.Api.Extensions;
 using MassTransit;
@@ -22,6 +23,7 @@ namespace EShop.User.Query.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddJWT(Configuration);
             services.AddMongoDB(Configuration);
             services.AddMassTransitExtension(Configuration);
             services.AddDependencyInjection();

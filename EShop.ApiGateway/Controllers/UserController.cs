@@ -1,4 +1,5 @@
-﻿using EShop.Infra.Commnad.User;
+﻿using EShop.Infra.Authentication;
+using EShop.Infra.Commnad.User;
 using EShop.Infra.EShopConts;
 using EShop.Infra.Events.Product;
 using EShop.Infra.Events.User;
@@ -39,8 +40,8 @@ namespace EShop.ApiGateway.Controllers
         public async Task<IActionResult> Login(UserLogin input) 
         {
             var userLoginInfo = new UserLogin() { Username = input.Username, Password = input.Password };
-            var userCreated = await _requestClient.GetResponse<UserCreated>(userLoginInfo);
-            return Ok(userCreated.Message);
+            var token = await _requestClient.GetResponse<JwtAuthToken>(userLoginInfo);
+            return Ok(token.Message);
         }
     }
 }
