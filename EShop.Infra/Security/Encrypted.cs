@@ -5,6 +5,8 @@ namespace EShop.Infra.Security
 {
     public class Encrypted : IEncrypter
     {
+        private readonly string Salt = "J:4=2cMIIkFG.6jWb7Z:x(VB)ZWYF+VZ(O9VXcNFS5BTAVIg6Q";
+
         public string GetHash(string value, string salt)
         {
             var derivedBytes = new Rfc2898DeriveBytes(value, GetBytes(salt), 1000);
@@ -13,10 +15,7 @@ namespace EShop.Infra.Security
 
         public string GetSalt()
         {
-            var saltBytes = new Byte[50];
-            var range = RandomNumberGenerator.Create();
-            range.GetBytes(saltBytes);
-            return Convert.ToBase64String(saltBytes);
+            return Salt;
         }
 
         private static byte[] GetBytes(string value)

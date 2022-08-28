@@ -2,7 +2,7 @@
 using EShop.Infra.Events.User;
 using System.Threading.Tasks;
 
-namespace EShop.User.Api.Services
+namespace EShop.User.DataProvider.Services
 {
     public interface IUserService
     {

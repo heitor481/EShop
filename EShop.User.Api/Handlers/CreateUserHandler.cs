@@ -1,5 +1,5 @@
 ﻿using EShop.Infra.Commnad.User;
-using EShop.User.Api.Services;
+using EShop.User.DataProvider.Services;
 using MassTransit;
 using System.Threading.Tasks;
 

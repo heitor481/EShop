@@ -4,7 +4,7 @@ using MongoDB.Driver;
 using MongoDB.Driver.Linq;
 using System.Threading.Tasks;
 
-namespace EShop.User.Api.Repositories
+namespace EShop.User.DataProvider.Repositories
 {
     public class UserRepository : IUserRepository
     {
@@ -30,7 +30,7 @@ namespace EShop.User.Api.Repositories
         public async Task<UserCreated> GetUserById(string username)
         {
             var user = await _mongoCollection.AsQueryable().FirstOrDefaultAsync(x => x.Username == username);
-            return new UserCreated() { Id = user.Id, Username = user.Username };
+            return new UserCreated() { Id = user?.Id, Username = user?.Username, Password = user.Password };
         }
     }
 }

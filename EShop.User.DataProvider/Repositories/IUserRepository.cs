@@ -2,7 +2,7 @@
 using EShop.Infra.Events.User;
 using System.Threading.Tasks;
 
-namespace EShop.User.Api.Repositories
+namespace EShop.User.DataProvider.Repositories
 {
     public interface IUserRepository
     {

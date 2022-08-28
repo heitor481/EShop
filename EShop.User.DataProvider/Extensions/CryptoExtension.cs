@@ -2,7 +2,7 @@
 using EShop.Infra.Events.User;
 using EShop.Infra.Security;
 
-namespace EShop.User.Api.Extensions
+namespace EShop.User.DataProvider.Extensions
 {
     public static class CryptoExtension
     {
@@ -13,9 +13,9 @@ namespace EShop.User.Api.Extensions
             return user;
         }
 
-        public static bool ValidatePassowrd(this UserCreated user, IEncrypter encrypter, CreateUser savedUser) 
+        public static bool ValidatePassowrd(this UserCreated user, IEncrypter encrypter, UserCreated savedUser) 
         { 
-            return savedUser.Password.Equals(encrypter.GetHash(user.Password, encrypter.GetSalt()));
+            return savedUser.Password.Equals(encrypter.GetHash(savedUser.Password, encrypter.GetSalt()));
         }
     }
 }

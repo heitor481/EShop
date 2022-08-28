@@ -1,5 +1,8 @@
 ﻿using EShop.Infra.Commnad.User;
 using EShop.Infra.EShopConts;
+using EShop.Infra.Events.Product;
+using EShop.Infra.Events.User;
+using EShop.Infra.Queries.Product;
 using MassTransit;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -12,11 +15,13 @@ namespace EShop.ApiGateway.Controllers
     public class UserController : ControllerBase
     {
         private readonly IBusControl _busControl;
+        private readonly IRequestClient<UserLogin> _requestClient;
 
 
-        public UserController(IBusControl busControl)
+        public UserController(IBusControl busControl, IRequestClient<UserLogin> requestClient)
         {
             _busControl = busControl;
+            _requestClient = requestClient;
         }
 
 
@@ -27,6 +32,15 @@ namespace EShop.ApiGateway.Controllers
             var bus = await _busControl.GetSendEndpoint(url);
             await bus.Send(input);
             return Ok("User created");
+        }
+
+        [HttpPost]
+        [Route("[Action]")]
+        public async Task<IActionResult> Login(UserLogin input) 
+        {
+            var userLoginInfo = new UserLogin() { Username = input.Username, Password = input.Password };
+            var userCreated = await _requestClient.GetResponse<UserCreated>(userLoginInfo);
+            return Ok(userCreated.Message);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using EShop.Infra.Queries.Product;
+﻿using EShop.Infra.Commnad.User;
+using EShop.Infra.Queries.Product;
 using MassTransit;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -25,6 +26,7 @@ namespace EShop.Infra.EventBus
                 }));
 
                 x.AddRequestClient<GetProductById>();
+                x.AddRequestClient<UserLogin>();
             });
 
             return services;
